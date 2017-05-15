@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div ng-app="myApp" ng-controller="controll">
+    <p>内容是：{{myMes}}</p>
+</div>
+<script src="../js/common/angular.js"></script>
+<script src="../js/common/jquery.js"></script>
+<script>
+    var app = angular.module("myApp",[]);
+    app.controller("controll",function($scope,$http){
+        $http({
+            method:"get",
+            url:"../../data/lyy.json"
+        }).then(function success(response){
+            //请求成功返回这个
+            console.log(response)
+            $scope.myMes = response.data
+            //返回的数据
+        },function error(response){
+            //请求失败返回这个
+            console.log("error")
+        })
+    })
+</script>
+</body>
+</html>

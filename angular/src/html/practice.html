@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div ng-app="myapp" ng-controller="controll">
+    <!--currency货币格式化-->
+    <p>{{ 3000 | currency}}</p>
+    <p>{{ 3000 | currency:'￥':3}}</p>
+    <p>{{ 3000 | currency:'RMB':6}}</p>
+
+    <!--uppercase，lowercase 大小写转换-->
+    <p>{{"wangbiying"|uppercase}}</p>
+    <p>{{"i love you"|lowercase}}</p>
+
+    <!--date格式化-->
+    <p>{{1490161945000|date:"yyyy-MM-dd HH:mm:ss"}}</p>  <!--2017-03-22 13:52:25-->
+
+    <!--number格式化-->
+    <p>{{149016.1945000|number:2}}</p>
+
+    <!--filter查找-->
+    <!--输入过滤器可以通过一个管道字符（|）和一个过滤器添加到指令中，该过滤器后跟一个冒号和一个模型名称-->
+    <p>{{ [{"age": 20,"id": 10,"name": "iphone"},
+        {"age": 12,"id": 11,"name": "sunm xing"},
+        {"age": 44,"id": 12,"name": "test abc"}
+        ] | filter:{'id':'10'} }}</p>
+
+    <!--limitTo截取-->
+
+    <p>{{"1234567890" | limitTo :6}}</p> <!--从前面开始截取6位-->
+    <p>{{"1234567890" | limitTo :-4}}</p> <!--从后面开始截取4位-->
+
+    <!--orderBy排序-->
+
+    <p>{{ [{"age": 20,"id": 10,"name": "iphone"},
+        {"age": 12,"id": 11,"name": "sunm xing"},
+        {"age": 44,"id": 12,"name": "test abc"}
+        ] | orderBy:'age' }}</p>    <!--根据age升序排-->
+    <p>{{ [{"age": 20,"id": 10,"name": "iphone"},
+        {"age": 12,"id": 11,"name": "sunm xing"},
+        {"age": 44,"id": 12,"name": "test abc"}
+        ] | orderBy:'age':true }}</p>    <!--根据age降序排-->
+</div>
+<script src="../js/common/angular.js"></script>
+<script src="../js/common/jquery.js"></script>
+<script>
+    var app = angular.module("myapp",[]);
+    app.controller("controll",function($scope){
+
+    })
+</script>
+</body>
+</html>

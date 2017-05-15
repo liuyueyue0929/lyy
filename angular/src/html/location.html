@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body ng-app="myapp" ng-controller="controll">
+<span>当前页面的网址是：{{myUrl}}</span>
+<script src="../js/common/angular.js"></script>
+<script src="../js/common/jquery.js"></script>
+<script>
+    var app = angular.module('myapp', []);
+    app.controller('controll', function($scope, $location) {
+        $scope.myUrl = $location.absUrl();
+    });
+
+</script>
+</body>
+</html>

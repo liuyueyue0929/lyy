@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div ng-app="myapp" ng-controller="controll">
+    <p>月月的时间是:</p>
+    <h3>{{theTime}}</h3>
+</div>
+<script src="../js/common/angular.js"></script>
+<script src="../js/common/jquery.js"></script>
+<script>
+    var app=angular.module('myapp',[]);
+    app.controller('controll',function($scope,$interval){
+        $scope.theTime=new Date().toLocaleDateString();
+        $interval(function () {
+            $scope.theTime = new Date().toLocaleTimeString();
+        }, 1000);
+    })
+
+</script>
+</body>
+</html>

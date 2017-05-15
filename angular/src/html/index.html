@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .red{
+            background:red
+        }
+        .bule{
+            background:blue
+        }
+    </style>
+</head>
+<body ng-app="myapp">
+<div ng-controller="controll">
+    <ul ng-init="names=['liuyueyue','xiaoheigege']">
+        <li ng-bind="name"></li>
+        <li><input type="text" ng-model="data"></li>
+        <li>双线数据显示mvvm;<span ng-bind="data"></span></li>
+        <br>
+        <li ng-click="fn()">点击我</li>
+        <li ng-bind="num"></li>
+        <li ng-show="boolean">显示还是隐藏</li>
+        <li ng-repeat="item in names" ng-if="item=='xiaoheigege'">
+            <span>{{item}}</span>
+        </li>
+        <li ng-class="{true:'red',false:'blue'}[true]"></li>
+    </ul>
+</div>
+<script src="../js/common/angular.js"></script>
+<script src="../js/common/jquery.js"></script>
+<script>
+    var app=angular.module("myapp",[])
+    app.controller("controll",function($scope){
+        $scope.name="刘月月"
+        $scope.num=0
+        $scope.boolean=true
+        $scope.fn=function(){
+           $scope.num++;
+            $scope.boolean=!$scope.boolean
+        }
+    })
+    var writ=function(time,msg,status){
+        var defer= $.Deferred()
+        setTimeout(function(){
+            if(status=="ok"){
+                defer.resolve(msg)
+            }else{
+                defer.reject(msg)
+            }
+        },time)
+        return defer.promise()
+    }
+    var fn1=writ(1000,"第一次延迟","ok")
+    var fn2=writ(3000,"第二次延迟","ok")
+    fn1.then(function(data){
+        console.log(data+"123")
+        fn2.data=data
+        return fn2
+    }).then(function(data){
+        console.log(data+"456")
+        console.log(this.data+data)
+    })
+
+</script>
+
+
+</body>
+</html>

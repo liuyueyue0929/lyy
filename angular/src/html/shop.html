@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        span{
+            width: 10px;
+            height: 10px;
+            background:#ccc;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body ng-app="myApp">
+<div ng-controller="controll">
+    <p class="clothe" ng-init="clothenum=1">衣服：
+        <span ng-click="clothenum=clothenum+1">+</span>
+        <span class="num" ng-bind="clothenum"></span>
+        <span ng-click="clothenum"0?clothenum=clothenum-1:clothenum>-</span>
+    </p>
+    <p class="pants" ng-init="pantsnum=1">裤子：
+        <span ng-click="pantsnum=pantsnum+1">+</span>
+        <span class="num" ng-bind="pantsnum"></span>
+        <span ng-click="pantsnum"0?pantsnum=pantsnum-1:pantsnum>-</span>
+    </p>
+</div>
+<script src="../js/common/angular.js"></script>
+<script>
+    var app=angular.module("myApp",[]);
+    app.controller("controll",function($scope){
+
+    })
+</script>
+</body>
+</html>
