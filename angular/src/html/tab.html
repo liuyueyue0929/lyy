@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html ng-app="myApp">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title</title>
+    <style type="text/css">
+        .J-tab .active{
+            background-color:aqua;
+        }
+        .J-tab div{
+            display:block;
+            width:250px;
+            height:100px;
+            border:1px solid #ccc;
+            text-align: center;
+            line-height: 100px;
+        }
+
+    </style>
+</head>
+<body>
+<div ng-controller="Aaa">
+    <my-tab my-data="sports" class="J-tab"></my-tab>
+</div>
+<script type="text/javascript" src="../js/common/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="../js/common/angular.min.js"></script>
+<script>
+    var m1 = angular.module('myApp',[]);
+    m1.controller('Aaa',['$scope',function($scope){
+        $scope.sports = [
+            {title : '刘月月1',content : '111111111'},
+            {title : '刘月月2',content : '222222222'},
+            {title : '刘月月3',content : '333333333'},
+            {title : '刘月月4',content : '444444444'}
+        ];
+    }]);
+    m1.directive('myTab',function(){
+        return {
+            restrict : 'E',
+            replace : true,
+            scope : {
+                myData : '='
+            },
+            template : '<div >\
+                    <input ng-repeat="\
+                    data in myData" type="button" ng-value="data.title" ng-class="{active:$first}">\
+                    <div ng-repeat="data in myData" ng-style="{display:$first?\'block\':\'none\'}">{{data.content}}</div>\
+                </div>',
+            link : function(scope,element,attr){
+                element.on('click','input',function(){
+                    var self = $(this) , i = self.index();
+                    self.addClass('active').siblings('input').removeClass('active');
+                    self.siblings('div').eq(i).show().siblings('div').hide();
+                });
+
+            }
+        };
+    });
+</script>
+</body>
+</html>
